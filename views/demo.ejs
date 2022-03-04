@@ -10,11 +10,6 @@
 </head>
 
 <body>
-    <input type="text" class="message">
-    <button onclick="send()">Send</button>
-    <h1></h1>
-    <br>
-    <br>
     <div id="volcanic_region_map"></div>
 
     <p id="loading" style="display: none;">Please wait, loading Scene ...</p>
@@ -25,28 +20,18 @@
         let myID = "";
         let the_data = {};
 
-   
-
         socket.on('message', (data) => {
-                
-                var data = JSON.parse(data);
-                the_data = data;
-              console.log(the_data);
-
+            var data = JSON.parse(data);
+            the_data = data;
+            console.log(the_data);
         })
 
         const send_now = (msg) => {
-    //   const message = document.querySelector('.message').value
-            socket.emit('message' ,JSON.stringify({type:"move",content:msg}));
+            socket.emit('message', JSON.stringify({ type: "move", content: msg }));
         }
-
-
-
     </script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <script type="text/javascript" src="/assets/VolcanicRegionMapDemo.js"></script>
-    
-
 </body>
 
 </html>

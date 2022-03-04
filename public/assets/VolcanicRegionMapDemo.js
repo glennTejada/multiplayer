@@ -1,5 +1,4 @@
-﻿
-class VolcanicRegionMapDemo extends Phaser.Scene {
+﻿class VolcanicRegionMapDemo extends Phaser.Scene {
     constructor() {
         super();
         this.players = {};
@@ -25,66 +24,51 @@ class VolcanicRegionMapDemo extends Phaser.Scene {
     }
 
     update() {
- 
+
         this.player.setVelocity(0);
 
-
-        if(the_data.type=="new_player"){
+        if (the_data.type == "new_player") {
             myID = the_data.content.id;
-            for(var i=0; i<the_data.content.players.length; i++){
-         
+            for (var i = 0; i < the_data.content.players.length; i++) {
                 this.players[the_data.content.players[i]] = this.physics.add.image(400, 300, 'block');
-            
             }
-    
-           the_data.type = "";
+            the_data.type = "";
         }
 
-        if(the_data.type=="joined"){
-         
-
-               this.players[the_data.content.id] = this.physics.add.image(400, 300, 'block');
-            
-           the_data.type = "";
+        if (the_data.type == "joined") {
+            this.players[the_data.content.id] = this.physics.add.image(400, 300, 'block');
+            the_data.type = "";
         }
 
-
-
-
-        if(the_data.type=="move"){
+        if (the_data.type == "move") {
             var values = the_data.content.split(',');
-     console.log(this.players);
-            try{
-                
-            this.players[values[0]].x = parseInt(values[1]);
-            this.players[values[0]].y = parseInt(values[2]);
-            
+            console.log(this.players);
+            try {
+
+                this.players[values[0]].x = parseInt(values[1]);
+                this.players[values[0]].y = parseInt(values[2]);
+            }
+            catch (err) {
+            } 
+            the_data.type = "";
         }
-        catch(err){
 
-        }the_data.type = "";
-    
-    }
-      
-
-   
         if (this.cursors.left.isDown) {
-           
             this.player.setVelocityX(-200);
-            send_now(this.player.x+","+this.player.y);
+            send_now(this.player.x + "," + this.player.y);
         }
         else if (this.cursors.right.isDown) {
             this.player.setVelocityX(200);
-            send_now(this.player.x+","+this.player.y);
+            send_now(this.player.x + "," + this.player.y);
         }
 
         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-200);
-            send_now(this.player.x+","+this.player.y);
+            send_now(this.player.x + "," + this.player.y);
         }
         else if (this.cursors.down.isDown) {
             this.player.setVelocityY(200);
-            send_now(this.player.x+","+this.player.y);
+            send_now(this.player.x + "," + this.player.y);
         }
     }
 }
