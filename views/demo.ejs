@@ -21,15 +21,27 @@
 
     <script>
         const socket = io('http://localhost:8000')
-        socket.on('connection')
+        let players = [];
+        let myID = "";
+        let the_data = {};
+
+   
 
         socket.on('message', (data) => {
-            document.querySelector('h1').innerHTML = data
+                
+                var data = JSON.parse(data);
+                the_data = data;
+              console.log(the_data);
+
         })
-        const send = () => {
-            const message = document.querySelector('.message').value
-            socket.emit('message' , message)
+
+        const send_now = (msg) => {
+    //   const message = document.querySelector('.message').value
+            socket.emit('message' ,JSON.stringify({type:"move",content:msg}));
         }
+
+
+
     </script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
     <script type="text/javascript" src="/assets/VolcanicRegionMapDemo.js"></script>
